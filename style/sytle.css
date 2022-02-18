@@ -20,16 +20,17 @@ body {
   margin-left: 25%;
   margin-right: 25%;
   margin-top: 10%;
+  gap: 20px;
 }
 
 .header_container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
   gap: 1.5em;
   -webkit-box-pack: start;
@@ -45,20 +46,81 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #777a92;
+  background-color: #393a4c;
   width: 100%;
+  height: 3rem;
   border-radius: .2em;
   padding: .2em .5em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2.5em;
+}
+
+.task_button_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.task_button_container:hover {
+  background-image: none;
+}
+
+.logo_theme {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.task_button {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #e4e5f1;
+}
+
+.task_button:hover {
+  cursor: pointer;
+}
+
+.task_entry_container {
+  width: 100%;
 }
 
 #task_input {
   background: transparent;
   border: none;
+  size: 4;
+}
+
+#task_input:focus {
+  outline: none;
 }
 
 #logo {
   font-family: "Josefin Sans", sans-serif;
   font-size: 3em;
   font-weight: 700;
+}
+
+#theme:hover {
+  cursor: pointer;
 }
 /*# sourceMappingURL=sytle.css.map */
