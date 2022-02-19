@@ -17,6 +17,14 @@ const changeTheme=()=>{
     }
 }
 
+let newCard = '<div class="card"><div class="task_button_container"><div class="task_button"></div><div class="added_task"></div></div></div>'
+//create new card
+
+const createTask=()=>{
+    $('.entry_card_continer').append(newCard);
+    
+}
+
 
 
 $(document).ready(function () {
@@ -25,6 +33,10 @@ $(document).ready(function () {
         changeTheme();
     });
 
+    $('#logo').click(function (e) { 
+        e.preventDefault();
+        createTask();
+    });
 
 
 
