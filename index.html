@@ -16,34 +16,62 @@
   <body>
     <div class="app_container">
       <!-- <header class="header_container"> -->
-        <div class="logo_theme">
-          <div id="logo">Todo</div>
-          <img src="./images/icon-moon.svg" alt="" id="theme">
+      <div class="logo_theme">
+        <div id="logo">Todo</div>
+        <img src="./images/icon-moon.svg" alt="" id="theme" />
+      </div>
+      <div class="card">
+        <div class="task_button_container">
+          <div class="task_button"></div>
         </div>
-        <div class="card">
-          <div class="task_button_container">
-            <div class="task_button"></div>
-          </div>
-          <div id="task_input_contianer">
-            <input id="task_input" type="text" placeholder="Create a new todo..."/>
-          </div>
+        <div id="task_input_contianer">
+          <input
+            id="task_input"
+            type="text"
+            placeholder="Create a new todo..."
+          />
         </div>
+      </div>
+      <div id="error-card">
+        <div id="error">Todo item cannot be empty</div>
+      </div>
       <!-- </header> -->
 
       <div class="task_entry_container">
-        <div class="entry_card_continer">
-          <div class="card">
+        <div id="entry_card_continer">
+          <!-- <div class="card task_track">
             <div class="task_button_container">
-              <div class="task_button"></div>
-              <div class="added_task"></div>
+              <div class="task_button">
+                <img class="checked" src="./images/icon-check.svg" alt="" />
+              </div>
             </div>
+            <div class="added_task"></div>
+          </div>
+          <div class="card task_track">
+            <div class="task_button_container">
+              <div class="task_button">
+                <img class="checked" src="./images/icon-check.svg" alt="" />
+              </div>
+            </div>
+            <div class="added_task"></div>
+          </div> -->
+        </div>
+
+        <div class="card" id="task_options">
+          <div id="items_left"><span id="item_count">0</span> items left</div>
+          <div id="filter_options">
+            <button class="fitler" id="all">All</button>
+            <button class="fitler" id="active">Active</button>
+            <button class="fitler" id="completed">Completed</button>
+          </div>
+          <div id="clear_completed">
+            <button class="fitler">Clear Completed</button>
           </div>
         </div>
       </div>
 
       <!-- Add dynamic number -->
-      items left All Active Completed Clear Completed Drag and drop to reorder
-      list
+      <!-- items left All Active Completed Clear Completed  -->
     </div>
     <script src="index.js"></script>
   </body>

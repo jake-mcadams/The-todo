@@ -19,7 +19,7 @@ $Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
 $Very-Dark-Blue: hsl(235, 21%, 11%);
 $Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
 $Light-Grayish-Blue: hsl(234, 39%, 85%);
-$Light-Grayish-Blue: hsl(236, 33%, 92%);  //(hover)
+$Light-Grayish-Blue-Hover: hsl(236, 33%, 92%);  //(hover)
 $Dark-Grayish-Blue: hsl(234, 11%, 52%);
 $Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
 $Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
@@ -32,3 +32,10 @@ $Font-size: 18px;
 //Typography
 
 $Josefin: 'Josefin Sans', sans-serif;
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
