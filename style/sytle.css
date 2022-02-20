@@ -26,6 +26,8 @@ body {
   height: fit-content;
   width: 50vw;
   position: absolute;
+  max-width: 100%;
+  padding: 0 15px;
 }
 
 .header_container {
@@ -55,7 +57,7 @@ body {
   width: 100%;
   height: 3rem;
   border-radius: 0.2em;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0.7em;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -63,10 +65,20 @@ body {
   border-top: 1px solid #777a92;
 }
 
-.added_task {
+.added_task_text {
   font-family: "Josefin Sans", sans-serif;
   font-size: 18px;
   color: #cacde8;
+}
+
+.added_task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .task_button_container {
@@ -149,6 +161,55 @@ body {
           user-select: none;
 }
 
+.fitler {
+  background: transparent;
+  border: none;
+  color: #777a92;
+}
+
+.fitler:focus {
+  color: #3a7bfd;
+}
+
+.fitler:hover {
+  cursor: pointer;
+  color: #161722;
+}
+
+.cancel_task {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -webkit-box-flex: 50%;
+      -ms-flex: 50%;
+          flex: 50%;
+}
+
+.cancel_task:hover {
+  cursor: pointer;
+}
+
+.right_side {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-flex: 50%;
+      -ms-flex: 50%;
+          flex: 50%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2.5em;
+}
+
+.cancel_container {
+  justify-self: flex-end;
+}
+
 #error-card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -189,21 +250,6 @@ body {
   width: 100%;
 }
 
-.fitler {
-  background: transparent;
-  border: none;
-  color: #777a92;
-}
-
-.fitler:focus {
-  color: #3a7bfd;
-}
-
-.fitler:hover {
-  cursor: pointer;
-  color: #161722;
-}
-
 #task_input {
   background: transparent;
   border: none;
@@ -235,6 +281,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-top: 1em;
 }
 
 #task_options > * {

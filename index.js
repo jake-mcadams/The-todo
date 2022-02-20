@@ -1,23 +1,28 @@
 $(document).ready(function () {
   let themeStyle = "dark";
   let taskCount = $("#entry_card_continer").children().length;
-  let newTask = '';
-  
-  
+  let newTask = "";
+  let testArray = [];
+
   $("#item_count").html(taskCount);
 
-
-  let newCard =(task)=> { return (`<div class="card added_task">
-  <div class="task_button_container">
-    <div class="task_button new_task_button">
-    <img src="./images/icon-check.svg" alt="" class="checked"/>
+  let newCard = (task) => {
+    return `<div class="card added_task">
+    <div class="right_side">
+      <div class="task_button_container">
+        <div class="task_button new_task_button">
+          <img src="./images/icon-check.svg" alt="" class="checked" />
+        </div>
+      </div>
+      <div class="added_task_text">${task}</div>
     </div>
-  </div>
-  <div class="added_task">${task}</div>
-</div>`)};
+    <div class="cancel_container">
+      <img src="./images/icon-cross.svg" alt="" class="cancel_task" />
+    </div>
+  </div>`;
+  };
 
-// new card object
-
+  // new card object
 
   //Theme change function
   const changeTheme = () => {
@@ -39,15 +44,23 @@ $(document).ready(function () {
   //create new card
 
   const createTask = (task) => {
-    $("#entry_card_continer").append(newCard(task));
+    if ($("#entry_card_continer").children().length > 0) {
+      $("#entry_card_continer")
+        .children()
+        .last()
+        .after(newCard(task))
+        .hide()
+        .slideDown();
+    } else {
+      $("#entry_card_continer").append(newCard(task)).hide().slideDown();
+      
+    }
   };
 
   //click functions
 
   $("#all").click(function (e) {
     e.preventDefault();
-    console.log("Test");
-    console.log(taskCount);
   });
 
   console.log(taskCount);
@@ -61,41 +74,63 @@ $(document).ready(function () {
   $("#logo").click(function (e) {
     e.preventDefault();
     // createTask();
-    
-    console.log(taskCount);
-    $("#item_count").html(taskCount);
-    
-    console.log(newTask);
   });
 
-  $(".task_button").click(function (e) {
-    e.preventDefault();
-    $(this).toggleClass('selected_task');
-    $(this).children('img').toggle();
+  // $(".task_button").click(function (e) {
+  //   e.preventDefault();
+  //   $(this).toggleClass("selected_task");
+  //   $(this).children("img").toggle();
+  
+
+
+  //   // $(this).children().attr("src", "./images/icon-check.svg");
+  // });
+  $(document).on("click", ".new_task_button", function () {
+    $(this).toggleClass("selected_task");
+    $(this).children("img").toggle();
+    $(this).children("img").toggleClass("remove");
+    $(this)
+    .parent()
+    .next()
+    .css("text-decoration", "line-through")
+    $(this).parents('.added_task').toggleClass('test');
+    if (!$(this).hasClass("selected_task")) {
+      $(this).parent().next().css("text-decoration", "none");
     
-    // $(this).children().attr("src", "./images/icon-check.svg");
-  });
-  $(document).on('click', ".new_task_button", function () {
-    $(this).toggleClass('selected_task');
-    $(this).children('img').toggle();
+    }
   });
 
-//   enter key todo submit
-$('#task_input').keypress((e)=> {
-    $('#error-card').slideUp() 
-    newTask = $('#task_input:text').val();
+  //   enter key todo submit
+  $("#task_input").keypress((e) => {
+    $("#error-card").slideUp();
+    newTask = $("#task_input:text").val();
     let keyPressed = e.key;
-      if(keyPressed === 'Enter'){
-        if($('#task_input:text').val() === undefined || $('#task_input:text').val() === ''){
-            $('#error-card').slideDown();
-        }else{
-            createTask(newTask);
-            taskCount = $("#entry_card_continer").children().length;
-            $("#item_count").html(taskCount);
-            $('#task_input:text').val('');
-        }
+    if (keyPressed === "Enter") {
+      if (
+        $("#task_input:text").val() === undefined ||
+        $("#task_input:text").val() === ""
+      ) {
+        $("#error-card").slideDown();
+      } else {
+        createTask(newTask);
+        taskCount = $("#entry_card_continer").children().length;
+        $("#item_count").html(taskCount);
+        $("#task_input:text").val("");
       }
+    }
+  });
 
-});
+  // Mark task as completed
+
+  $("#completed").on("click", function() {
+      // console.log($('#entry_card_continer')[0].children)
+      let amountRemoved = $("img").filter(".remove").length
+      // $("img").filter(".remove").parents('.added_task').slideUp()
+      $('#entry_card_continer').children('.test').each(function(){
+        $(this).slideUp()
+      })
+      $("#item_count").html(taskCount -amountRemoved);
+      
+  });
   
 });

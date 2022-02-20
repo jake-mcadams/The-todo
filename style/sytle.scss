@@ -19,6 +19,7 @@ body {
   height: fit-content;
   width: 50vw;
   position: absolute;
+  max-width: 100%;
 }
 
 .header_container {
@@ -36,16 +37,21 @@ body {
   width: 100%;
   height: 3rem;
   border-radius: 0.2em;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0.7em;
   align-items: center;
   gap: 2.5em;
   border-top: 1px solid $Dark-Grayish-Blue;
+  // justify-content: space-between;
 }
 
-.added_task{
+.added_task_text{
   font-family: $Josefin;
   font-size: 18px;
   color: $Light-Grayish-Blue;
+}
+.added_task{
+  display: flex;
+  flex-direction: row;
 }
 
 .task_button_container {
@@ -100,6 +106,48 @@ body {
   user-select: none;
 }
 
+// .completed{
+//   text-decoration: line-through;
+// }
+
+
+.fitler{
+  background: transparent;
+  border: none;
+  color: $Dark-Grayish-Blue;
+
+  &:focus{
+    color: $Bright-Blue;
+  }
+
+  &:hover{
+    cursor: pointer;
+    color: $Very-Dark-Blue;
+  }
+}
+
+.cancel_task{
+  align-self: center;
+  flex: 50%;
+
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.right_side{
+  display: flex;
+  flex-direction: row;
+  flex: 50%;
+  align-items: center;
+  gap: 2.5em;
+  
+}
+
+.cancel_container{
+  justify-self: flex-end;
+}
+
 #error-card{
   display: flex;
   flex-direction: row;
@@ -124,20 +172,6 @@ body {
     width: 100%;
 }
 
-.fitler{
-  background: transparent;
-  border: none;
-  color: $Dark-Grayish-Blue;
-
-  &:focus{
-    color: $Bright-Blue;
-  }
-
-  &:hover{
-    cursor: pointer;
-    color: $Very-Dark-Blue;
-  }
-}
 
 #task_input {
   background: transparent;
@@ -168,6 +202,7 @@ body {
   border-top: 1px solid $Dark-Grayish-Blue;
   display: flex;
   justify-content: space-between;
+  margin-top: 1em;
 
   >*{
     color:$Dark-Grayish-Blue;
