@@ -39,3 +39,9 @@ $Josefin: 'Josefin Sans', sans-serif;
     justify-content: center;
     align-items: center;
 }
+
+@mixin pageFontStyle {
+    font-family: $Josefin;
+    font-size: 18px;
+    color: $Light-Grayish-Blue;
+}

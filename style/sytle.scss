@@ -41,15 +41,13 @@ body {
   align-items: center;
   gap: 2.5em;
   border-top: 1px solid $Dark-Grayish-Blue;
-  // justify-content: space-between;
 }
 
-.added_task_text{
-  font-family: $Josefin;
-  font-size: 18px;
-  color: $Light-Grayish-Blue;
+.added_task_text {
+  @include pageFontStyle;
 }
-.added_task{
+
+.added_task {
   display: flex;
   flex-direction: row;
 }
@@ -58,10 +56,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  // border-radius: 50%;
-  // background-image: $Very-Dark-Grayish-Blue;
-  // height: 25px;
-  // width: 25px;
 
   &:hover {
     background-image: none;
@@ -91,64 +85,65 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
 }
 
-.selected_task{
+.selected_task {
   background: $Check-Background;
-  // background-image: url(./images/icon-check.svg);
-  // background-position: center;
-  // background-repeat: no-repeat;  
 }
 
-.checked{
+.checked {
   display: none;
   user-select: none;
 }
 
-// .completed{
-//   text-decoration: line-through;
-// }
 
-
-.fitler{
+.fitler {
   background: transparent;
   border: none;
   color: $Dark-Grayish-Blue;
+  font-family: $Josefin;
 
-  &:focus{
-    color: $Bright-Blue;
-  }
-
-  &:hover{
+  &:hover {
     cursor: pointer;
     color: $Very-Dark-Blue;
   }
+
 }
 
-.cancel_task{
+.currentFilter{
+  color: $Bright-Blue;
+}
+
+.disabledFilter{
+  
+  &:hover{
+    cursor: not-allowed;
+  }
+}
+
+.cancel_task {
   align-self: center;
   flex: 50%;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
 
-.right_side{
+.right_side {
   display: flex;
   flex-direction: row;
   flex: 50%;
   align-items: center;
   gap: 2.5em;
-  
 }
 
-.cancel_container{
+.cancel_container {
   justify-self: flex-end;
 }
 
-#error-card{
+#error-card {
   display: flex;
   flex-direction: row;
   background-color: $Very-Dark-Grayish-Blue;
@@ -161,17 +156,14 @@ body {
   color: red;
   font-size: 18px;
   display: none;
-  
-  // border-top: 1px solid $Dark-Grayish-Blue;
 }
 
-#entry_card_continer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;    
-    width: 100%;
+#entry_card_continer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
-
 
 #task_input {
   background: transparent;
@@ -185,7 +177,6 @@ body {
   }
 }
 
-
 #logo {
   font-family: $Josefin;
   font-size: 3em;
@@ -198,13 +189,14 @@ body {
   }
 }
 
-#task_options{
+#task_options {
   border-top: 1px solid $Dark-Grayish-Blue;
   display: flex;
   justify-content: space-between;
   margin-top: 1em;
 
-  >*{
-    color:$Dark-Grayish-Blue;
+  > * {
+    color: $Dark-Grayish-Blue;
+    font-family: $Josefin;
   }
 }

@@ -2,12 +2,11 @@ $(document).ready(function () {
   let themeStyle = "dark";
   let taskCount = $("#entry_card_continer").children().length;
   let newTask = "";
-  let testArray = [];
 
   $("#item_count").html(taskCount);
 
   let newCard = (task) => {
-    return `<div class="card added_task">
+    return `<div class="card added_task activeTask">
     <div class="right_side">
       <div class="task_button_container">
         <div class="task_button new_task_button">
@@ -53,17 +52,14 @@ $(document).ready(function () {
         .slideDown();
     } else {
       $("#entry_card_continer").append(newCard(task)).hide().slideDown();
-      
     }
   };
 
   //click functions
 
-  $("#all").click(function (e) {
-    e.preventDefault();
-  });
 
-  console.log(taskCount);
+
+  // console.log(taskCount);
 
   $("#theme").click((e) => {
     e.preventDefault();
@@ -80,8 +76,6 @@ $(document).ready(function () {
   //   e.preventDefault();
   //   $(this).toggleClass("selected_task");
   //   $(this).children("img").toggle();
-  
-
 
   //   // $(this).children().attr("src", "./images/icon-check.svg");
   // });
@@ -89,14 +83,11 @@ $(document).ready(function () {
     $(this).toggleClass("selected_task");
     $(this).children("img").toggle();
     $(this).children("img").toggleClass("remove");
-    $(this)
-    .parent()
-    .next()
-    .css("text-decoration", "line-through")
-    $(this).parents('.added_task').toggleClass('test');
+    $(this).parent().next().css("text-decoration", "line-through");
+    $(this).parents(".added_task").toggleClass("activeTask");
+    $(this).parents(".added_task").toggleClass("markedCompleted");
     if (!$(this).hasClass("selected_task")) {
       $(this).parent().next().css("text-decoration", "none");
-    
     }
   });
 
@@ -120,17 +111,72 @@ $(document).ready(function () {
     }
   });
 
-  // Mark task as completed
+  // Filter completed
 
-  $("#completed").on("click", function() {
-      // console.log($('#entry_card_continer')[0].children)
-      let amountRemoved = $("img").filter(".remove").length
-      // $("img").filter(".remove").parents('.added_task').slideUp()
-      $('#entry_card_continer').children('.test').each(function(){
-        $(this).slideUp()
-      })
-      $("#item_count").html(taskCount -amountRemoved);
-      
+  $("#completed").on("click", function () {
+    let amountRemoved = $("img").filter(".remove").length;
+    // console.log($("img").filter(".remove").length);
+    console.log($("#entry_card_continer").children(".markedCompleted").length)
+    if($("#entry_card_continer").children(".markedCompleted").length>0){
+      if (!$("#completed").hasClass("currentFilter")) {
+        $("#active").addClass("disabledFilter");
+        $("#active").prop("disabled", true);
+        $("#all").addClass("disabledFilter");
+        $("#all").prop("disabled", true);
+        $("#completed").toggleClass("currentFilter");
+        $("#entry_card_continer")
+          .children(".activeTask")
+          .each(function () {
+            $(this).slideUp();
+          });
+        $("#item_count").html(taskCount - amountRemoved);
+      } else {
+        $("#active").removeClass("disabledFilter");
+        $("#active").prop("disabled", false);
+        $("#completed").toggleClass("currentFilter");
+        $("#entry_card_continer")
+          .children(".activeTask")
+          .each(function () {
+            $(this).slideDown();
+          });
+        $("#item_count").html(taskCount);
+      }
+    }
   });
-  
+
+  //Filter active
+
+  $("#active").on("click", function () {
+    let amountRemoved = $("img").filter(".remove").length;
+    // console.log($("img").filter(".remove").length);
+    if($("#entry_card_continer").children(".activeTask").length>0){
+      if (!$("#active").hasClass("currentFilter")) {
+        $("#completed").addClass("disabledFilter");
+        $("#completed").prop("disabled", true);
+        $("#all").addClass("disabledFilter");
+        $("#all").prop("disabled", true);
+        $("#active").toggleClass("currentFilter");
+        $("#entry_card_continer")
+          .children(".markedCompleted")
+          .each(function () {
+            $(this).slideUp();
+          });
+        $("#item_count").html(taskCount - amountRemoved);
+      } else {
+        $("#completed").removeClass("disabledFilter");
+        $("#completed").prop("disabled", false);
+        $("#active").toggleClass("currentFilter");
+        $("#entry_card_continer")
+          .children(".markedCompleted")
+          .each(function () {
+            $(this).slideDown();
+          });
+      }
+    }
+  });
+
+  //Fitler all
+  // $("#all").click(function (e) {
+  //   e.preventDefault();
+  // });
 });

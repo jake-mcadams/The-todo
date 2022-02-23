@@ -27,7 +27,6 @@ body {
   width: 50vw;
   position: absolute;
   max-width: 100%;
-  padding: 0 15px;
 }
 
 .header_container {
@@ -165,15 +164,20 @@ body {
   background: transparent;
   border: none;
   color: #777a92;
-}
-
-.fitler:focus {
-  color: #3a7bfd;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .fitler:hover {
   cursor: pointer;
   color: #161722;
+}
+
+.currentFilter {
+  color: #3a7bfd;
+}
+
+.disabledFilter:hover {
+  cursor: not-allowed;
 }
 
 .cancel_task {
@@ -286,5 +290,6 @@ body {
 
 #task_options > * {
   color: #777a92;
+  font-family: "Josefin Sans", sans-serif;
 }
 /*# sourceMappingURL=sytle.css.map */
