@@ -20,7 +20,7 @@
         <div id="logo">Todo</div>
         <img src="./images/icon-moon.svg" alt="" id="theme" />
       </div>
-      <div class="card">
+      <div class="card card_Dark">
         <div class="task_button_container">
           <div class="task_button"></div>
         </div>
@@ -32,7 +32,7 @@
           />
         </div>
       </div>
-      <div id="error-card">
+      <div class="error-card" id="error_container">
         <div id="error">Todo item cannot be empty</div>
       </div>
       <!-- </header> -->
@@ -40,7 +40,7 @@
       <div class="task_entry_container">
         <div id="entry_card_continer"></div>
 
-        <div class="card" id="task_options">
+        <div class="card card_Dark" id="task_options">
           <div id="items_left"><span id="item_count">0</span> items left</div>
           <div id="filter_options">
             <button class="fitler" id="all">All</button>
@@ -48,8 +48,11 @@
             <button class="fitler" id="completed">Completed</button>
           </div>
           <div id="clear_completed">
-            <button class="fitler">Clear Completed</button>
+            <button class="fitler" id="clear_completed">Clear Completed</button>
           </div>
+        </div>
+        <div class="error-card" id="clear_completed_container">
+          <div id="no-completed">Mark items as completed to clear</div>
         </div>
       </div>
 

@@ -7,22 +7,22 @@ $Check-Background: linear-gradient(to right, hsl(192, 100%, 67%) , hsl(280, 87%,
 
 //  Neutral
 
-//  Light Theme
+//  Light-Theme-
 
-$Very-Light-Gray: hsl(0, 0%, 98%);
-$Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
-$Light-Grayish-Blue: hsl(231, 100%, 1%);
-$Dark-Grayish-Blue: hsl(236, 9%, 61%);
-$Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
-//  Dark Theme
+$Light-Theme-Very-Light-Gray: hsl(0, 0%, 98%);
+$Light-Theme-Very-Light-Grayish-Blue: hsl(236, 33%, 92%);
+$Light-Theme-Dark-Light-Grayish-Blue: hsl(231, 100%, 1%);
+$Light-Theme-Dark-Grayish-Blue: hsl(236, 9%, 61%);
+$Light-Theme-Very-Dark-Grayish-Blue: hsl(235, 19%, 35%);
+//  Dark-Theme-
 
-$Very-Dark-Blue: hsl(235, 21%, 11%);
-$Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
-$Light-Grayish-Blue: hsl(234, 39%, 85%);
-$Light-Grayish-Blue-Hover: hsl(236, 33%, 92%);  //(hover)
-$Dark-Grayish-Blue: hsl(234, 11%, 52%);
-$Very-Dark-Grayish-Blue: hsl(233, 14%, 35%);
-$Very-Dark-Grayish-Blue: hsl(237, 14%, 26%);
+$Dark-Theme-Very-Dark-Blue: hsl(235, 21%, 11%);
+$Dark-Theme-Very-Dark-Desaturated-Blue: hsl(235, 24%, 19%);
+$Dark-Theme-Light-Grayish-Blue: hsl(234, 39%, 85%);
+$Dark-Theme-Light-Grayish-Blue-Hover: hsl(236, 33%, 92%);  //(hover)
+$Dark-Theme-Dark-Grayish-Blue: hsl(234, 11%, 52%);
+$Dark-Theme-Very-Dark-Grayish-Blue-one: hsl(233, 14%, 35%);
+$Dark-Theme-Very-Dark-Grayish-Blue-two: hsl(237, 14%, 26%);
 
 
 // Font
@@ -43,5 +43,5 @@ $Josefin: 'Josefin Sans', sans-serif;
 @mixin pageFontStyle {
     font-family: $Josefin;
     font-size: 18px;
-    color: $Light-Grayish-Blue;
+    // color: $Dark-Theme-Light-Grayish-Blue;
 }

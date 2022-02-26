@@ -5,8 +5,14 @@ $(document).ready(function () {
 
   $("#item_count").html(taskCount);
 
-  let newCard = (task) => {
-    return `<div class="card added_task activeTask">
+  const newCard = (task) => {
+    let cardTheme;
+    if (themeStyle === "dark") {
+      cardTheme = "card_Dark";
+    } else {
+      cardTheme = "card_Light";
+    }
+    return `<div class="${cardTheme} card added_task activeTask">
     <div class="right_side">
       <div class="task_button_container">
         <div class="task_button new_task_button">
@@ -30,12 +36,26 @@ $(document).ready(function () {
       $("#logo").css("color", "hsl(0, 0%, 98%)");
       $(document.body).css("background-color", "hsl(236, 33%, 92%)");
       $(".card").css("background-color", "hsl(0, 0%, 98%)");
+      $("#task_input").css("color", "hsl(231, 100%, 1%)");
+      $("#error_container").css("background-color", "hsl(0, 0%, 98%)");
+      $("#clear_completed_container").css(
+        "background-color",
+        "hsl(0, 0%, 98%)"
+      );
+      $(".added_task_text").css("color", "hsl(237, 14%, 26%)");
       themeStyle = "light";
     } else {
       $("#theme").attr("src", "./images/icon-moon.svg");
       $("#logo").css("color", "hsl(235, 21%, 11%)");
       $(document.body).css("background-color", "hsl(235, 21%, 11%)");
       $(".card").css("background-color", "hsl(237, 14%, 26%)");
+      $("#task_input").css("color", "hsl(234, 39%, 85%)");
+      $("#error_container").css("background-color", "hsl(237, 14%, 26%)");
+      $("#clear_completed_container").css(
+        "background-color",
+        "hsl(237, 14%, 26%)"
+      );
+      $(".added_task_text").css("color", "hsl(234, 39%, 85%)");
       themeStyle = "dark";
     }
   };
@@ -56,8 +76,6 @@ $(document).ready(function () {
   };
 
   //click functions
-
-
 
   // console.log(taskCount);
 
@@ -83,6 +101,7 @@ $(document).ready(function () {
     $(this).toggleClass("selected_task");
     $(this).children("img").toggle();
     $(this).children("img").toggleClass("remove");
+    $("#clear_completed_container").slideUp();
     $(this).parent().next().css("text-decoration", "line-through");
     $(this).parents(".added_task").toggleClass("activeTask");
     $(this).parents(".added_task").toggleClass("markedCompleted");
@@ -93,7 +112,7 @@ $(document).ready(function () {
 
   //   enter key todo submit
   $("#task_input").keypress((e) => {
-    $("#error-card").slideUp();
+    $("#error_container").slideUp();
     newTask = $("#task_input:text").val();
     let keyPressed = e.key;
     if (keyPressed === "Enter") {
@@ -101,7 +120,10 @@ $(document).ready(function () {
         $("#task_input:text").val() === undefined ||
         $("#task_input:text").val() === ""
       ) {
-        $("#error-card").slideDown();
+        if (themeStyle === "light") {
+          $("#error_container").css("background-color", "hsl(0, 0%, 98%)");
+        }
+        $("#error_container").slideDown();
       } else {
         createTask(newTask);
         taskCount = $("#entry_card_continer").children().length;
@@ -115,9 +137,10 @@ $(document).ready(function () {
 
   $("#completed").on("click", function () {
     let amountRemoved = $("img").filter(".remove").length;
+
     // console.log($("img").filter(".remove").length);
-    console.log($("#entry_card_continer").children(".markedCompleted").length)
-    if($("#entry_card_continer").children(".markedCompleted").length>0){
+    console.log($("#entry_card_continer").children(".markedCompleted").length);
+    if ($("#entry_card_continer").children(".markedCompleted").length > 0) {
       if (!$("#completed").hasClass("currentFilter")) {
         $("#active").addClass("disabledFilter");
         $("#active").prop("disabled", true);
@@ -149,7 +172,7 @@ $(document).ready(function () {
   $("#active").on("click", function () {
     let amountRemoved = $("img").filter(".remove").length;
     // console.log($("img").filter(".remove").length);
-    if($("#entry_card_continer").children(".activeTask").length>0){
+    if ($("#entry_card_continer").children(".activeTask").length > 0) {
       if (!$("#active").hasClass("currentFilter")) {
         $("#completed").addClass("disabledFilter");
         $("#completed").prop("disabled", true);
@@ -161,7 +184,9 @@ $(document).ready(function () {
           .each(function () {
             $(this).slideUp();
           });
-        $("#item_count").html(taskCount - amountRemoved);
+        if (taskCount > 0) {
+          $("#item_count").html(taskCount - amountRemoved);
+        }
       } else {
         $("#completed").removeClass("disabledFilter");
         $("#completed").prop("disabled", false);
@@ -175,8 +200,38 @@ $(document).ready(function () {
     }
   });
 
-  //Fitler all
-  // $("#all").click(function (e) {
-  //   e.preventDefault();
-  // });
+  //clear completed
+  $("#clear_completed").on("click", function () {
+    let amountRemoved = $("img").filter(".remove").length;
+    if ($("#entry_card_continer").children(".markedCompleted").length === 0) {
+      console.log("working");
+      $("#clear_completed_container").slideDown();
+    }
+    $("#entry_card_continer")
+      .children(".markedCompleted")
+      .each(function () {
+        $(this).slideUp();
+        setTimeout(() => {
+          $(this).remove();
+        }, 1000);
+      });
+    $("#item_count").html(taskCount - amountRemoved);
+  });
+
+  //clicking remove individual tasks
+
+  $(document).on("click", ".cancel_container", function () {
+    let amountRemoved = $("img").filter(".remove").length;
+    // let testing = $(this).prev().text();
+    // console.log(testing);
+    // if ($(this).prev().children(".remove")) {
+    //   // console.log($(this).prev().children(".remove"))
+    //   $(this).prev().children(".added_task_text").text("testing");
+    // }
+    $(this).parents(".added_task").slideUp();
+    setTimeout(() => {
+      $(this).parents(".added_task").remove();
+    }, 1000);
+    $("#item_count").html(taskCount - amountRemoved);
+  });
 });

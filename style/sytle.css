@@ -44,7 +44,7 @@ body {
           justify-content: flex-start;
 }
 
-.card {
+.card_Dark {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -52,7 +52,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #393a4c;
+  background-color: #4d5066;
   width: 100%;
   height: 3rem;
   border-radius: 0.2em;
@@ -62,12 +62,33 @@ body {
           align-items: center;
   gap: 2.5em;
   border-top: 1px solid #777a92;
+  color: #cacde8;
+}
+
+.card_Light {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #fafafa;
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.2em;
+  padding: 0.2em 0.7em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2.5em;
+  border-top: 1px solid #777a92;
+  color: #393a4c;
 }
 
 .added_task_text {
   font-family: "Josefin Sans", sans-serif;
   font-size: 18px;
-  color: #cacde8;
 }
 
 .added_task {
@@ -214,7 +235,7 @@ body {
   justify-self: flex-end;
 }
 
-#error-card {
+.error-card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -222,7 +243,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #393a4c;
+  background-color: #4d5066;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -252,6 +273,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+}
+
+#clear_completed_container {
+  margin-top: 1em;
 }
 
 #task_input {
@@ -291,5 +316,9 @@ body {
 #task_options > * {
   color: #777a92;
   font-family: "Josefin Sans", sans-serif;
+}
+
+#all {
+  display: none;
 }
 /*# sourceMappingURL=sytle.css.map */
