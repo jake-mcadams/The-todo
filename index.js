@@ -46,7 +46,6 @@ $(document).ready(function () {
       $("#theme").attr("src", "./images/icon-moon.svg");
       $("#logo").css("color", "hsl(0, 0%, 98%)");
       $(document.body).css("background-color", "hsl(236, 33%, 92%)");
-      // $(".card").css("background-color", "hsl(0, 0%, 98%)");
       $(".card").removeClass("card_Dark");
       $(".card").addClass("card_Light");
       $("#task_input").css("color", "hsl(231, 100%, 1%)");
@@ -62,7 +61,6 @@ $(document).ready(function () {
       $("#theme").attr("src", "./images/icon-sun.svg");
       $("#logo").css("color", "hsl(235, 21%, 11%)");
       $(document.body).css("background-color", "hsl(235, 21%, 11%)");
-      // $(".card").css("background-color", "hsl(237, 14%, 26%)");
       $(".card").addClass("card_Dark");
       $(".card").removeClass("card_Light");
       $("#task_input").css("color", "hsl(234, 39%, 85%)");
@@ -94,8 +92,6 @@ $(document).ready(function () {
 
   //click functions
 
-  // console.log(taskCount);
-
   $("#theme").click((e) => {
     e.preventDefault();
     changeTheme();
@@ -106,14 +102,6 @@ $(document).ready(function () {
     e.preventDefault();
     // createTask();
   });
-
-  // $(".task_button").click(function (e) {
-  //   e.preventDefault();
-  //   $(this).toggleClass("selected_task");
-  //   $(this).children("img").toggle();
-
-  //   // $(this).children().attr("src", "./images/icon-check.svg");
-  // });
   $(document).on("click", ".new_task_button", function () {
     $(this).toggleClass("selected_task");
     $(this).children("img").toggle();
@@ -153,12 +141,9 @@ $(document).ready(function () {
   // Filter completed
 
   $("#completed").on("click", function () {
-    // let amountRemoved = $("img").filter(".remove").length;
     let amountRemoved = $("#entry_card_continer")
       .children()
       .not(".markedCompleted").length;
-    // console.log($("img").filter(".remove").length);
-    // console.log($("#entry_card_continer").children(".markedCompleted").length);
     if (
       $("#entry_card_continer").children(".markedCompleted").length === 1 &&
       $("#entry_card_continer").children().length > 1
@@ -190,12 +175,8 @@ $(document).ready(function () {
           .each(function () {
             $(this).slideDown();
           });
-        // console.log("taskCount Before: " + taskCount);
-        // console.log("amountRemoved Before: " + amountRemoved);
         $("#item_count").text(itemCount(taskCount, amountRemoved, "add"));
         taskCount = itemCount(amountRemoved, taskCount, "add");
-        // console.log("taskCount after: " + taskCount);
-        // console.log("amountRemoved after: " + amountRemoved);
       }
     }
   });
@@ -273,12 +254,6 @@ $(document).ready(function () {
 
   $(document).on("click", ".cancel_container", function () {
     let amountRemoved = 1;
-    // let testing = $(this).prev().text();
-    // console.log(testing);
-    // if ($(this).prev().children(".remove")) {
-    //   // console.log($(this).prev().children(".remove"))
-    //   $(this).prev().children(".added_task_text").text("testing");
-    // }
     $(this).parents(".added_task").slideUp();
     setTimeout(() => {
       $(this).parents(".added_task").remove();
