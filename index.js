@@ -22,9 +22,20 @@ $(document).ready(function () {
       <div class="added_task_text">${task}</div>
     </div>
     <div class="cancel_container">
-      <img src="./images/icon-cross.svg" alt="" class="cancel_task" />
+      <img src="./images/icon-cross-${themeStyle}.svg" alt="" class="cancel_task" />
     </div>
   </div>`;
+  };
+
+  //update item count
+
+  const itemCount = (currentItems, removedItems, displayType) => {
+    if (displayType === "remove") {
+      return currentItems - removedItems;
+    }
+    if (displayType === "add") {
+      return currentItems + removedItems;
+    }
   };
 
   // new card object
@@ -32,29 +43,35 @@ $(document).ready(function () {
   //Theme change function
   const changeTheme = () => {
     if (themeStyle === "dark") {
-      $("#theme").attr("src", "./images/icon-sun.svg");
+      $("#theme").attr("src", "./images/icon-moon.svg");
       $("#logo").css("color", "hsl(0, 0%, 98%)");
       $(document.body).css("background-color", "hsl(236, 33%, 92%)");
-      $(".card").css("background-color", "hsl(0, 0%, 98%)");
+      // $(".card").css("background-color", "hsl(0, 0%, 98%)");
+      $(".card").removeClass("card_Dark");
+      $(".card").addClass("card_Light");
       $("#task_input").css("color", "hsl(231, 100%, 1%)");
       $("#error_container").css("background-color", "hsl(0, 0%, 98%)");
       $("#clear_completed_container").css(
         "background-color",
         "hsl(0, 0%, 98%)"
       );
+      $(".cancel_task").attr("src", "./images/icon-cross-light.svg");
       $(".added_task_text").css("color", "hsl(237, 14%, 26%)");
       themeStyle = "light";
     } else {
-      $("#theme").attr("src", "./images/icon-moon.svg");
+      $("#theme").attr("src", "./images/icon-sun.svg");
       $("#logo").css("color", "hsl(235, 21%, 11%)");
       $(document.body).css("background-color", "hsl(235, 21%, 11%)");
-      $(".card").css("background-color", "hsl(237, 14%, 26%)");
+      // $(".card").css("background-color", "hsl(237, 14%, 26%)");
+      $(".card").addClass("card_Dark");
+      $(".card").removeClass("card_Light");
       $("#task_input").css("color", "hsl(234, 39%, 85%)");
       $("#error_container").css("background-color", "hsl(237, 14%, 26%)");
       $("#clear_completed_container").css(
         "background-color",
         "hsl(237, 14%, 26%)"
       );
+      $(".cancel_task").attr("src", "./images/icon-cross-dark.svg");
       $(".added_task_text").css("color", "hsl(234, 39%, 85%)");
       themeStyle = "dark";
     }
@@ -136,11 +153,16 @@ $(document).ready(function () {
   // Filter completed
 
   $("#completed").on("click", function () {
-    let amountRemoved = $("img").filter(".remove").length;
-
+    // let amountRemoved = $("img").filter(".remove").length;
+    let amountRemoved = $("#entry_card_continer")
+      .children()
+      .not(".markedCompleted").length;
     // console.log($("img").filter(".remove").length);
-    console.log($("#entry_card_continer").children(".markedCompleted").length);
-    if ($("#entry_card_continer").children(".markedCompleted").length > 0) {
+    // console.log($("#entry_card_continer").children(".markedCompleted").length);
+    if (
+      $("#entry_card_continer").children(".markedCompleted").length === 1 &&
+      $("#entry_card_continer").children().length > 1
+    ) {
       if (!$("#completed").hasClass("currentFilter")) {
         $("#active").addClass("disabledFilter");
         $("#active").prop("disabled", true);
@@ -152,7 +174,13 @@ $(document).ready(function () {
           .each(function () {
             $(this).slideUp();
           });
-        $("#item_count").html(taskCount - amountRemoved);
+        console.log("taskCount Before: " + taskCount);
+        console.log("amountRemoved Before: " + amountRemoved);
+        taskCount = itemCount(taskCount, amountRemoved, "remove");
+        $("#item_count").html(taskCount);
+        console.log("taskCount after: " + taskCount);
+        console.log("amountRemoved after: " + amountRemoved);
+        console.log($("#item_count").html());
       } else {
         $("#active").removeClass("disabledFilter");
         $("#active").prop("disabled", false);
@@ -162,7 +190,12 @@ $(document).ready(function () {
           .each(function () {
             $(this).slideDown();
           });
-        $("#item_count").html(taskCount);
+        // console.log("taskCount Before: " + taskCount);
+        // console.log("amountRemoved Before: " + amountRemoved);
+        $("#item_count").text(itemCount(taskCount, amountRemoved, "add"));
+        taskCount = itemCount(amountRemoved, taskCount, "add");
+        // console.log("taskCount after: " + taskCount);
+        // console.log("amountRemoved after: " + amountRemoved);
       }
     }
   });
@@ -170,7 +203,9 @@ $(document).ready(function () {
   //Filter active
 
   $("#active").on("click", function () {
-    let amountRemoved = $("img").filter(".remove").length;
+    let amountRemoved = $("#entry_card_continer")
+      .children()
+      .filter(".markedCompleted").length;
     // console.log($("img").filter(".remove").length);
     if ($("#entry_card_continer").children(".activeTask").length > 0) {
       if (!$("#active").hasClass("currentFilter")) {
@@ -185,7 +220,14 @@ $(document).ready(function () {
             $(this).slideUp();
           });
         if (taskCount > 0) {
-          $("#item_count").html(taskCount - amountRemoved);
+          console.log("taskCount Before: " + taskCount);
+          console.log("amountRemoved Before: " + amountRemoved);
+          console.log(taskCount - amountRemoved);
+          taskCount = itemCount(taskCount, amountRemoved, "remove");
+          console.log(taskCount);
+          $("#item_count").html(taskCount);
+          console.log("taskCount after: " + taskCount);
+          console.log("amountRemoved after: " + amountRemoved);
         }
       } else {
         $("#completed").removeClass("disabledFilter");
@@ -196,13 +238,17 @@ $(document).ready(function () {
           .each(function () {
             $(this).slideDown();
           });
+        $("#item_count").text(itemCount(taskCount, amountRemoved, "add"));
+        taskCount = itemCount(amountRemoved, taskCount, "add");
       }
     }
   });
 
   //clear completed
   $("#clear_completed").on("click", function () {
-    let amountRemoved = $("img").filter(".remove").length;
+    let amountRemoved = $("#entry_card_continer")
+    .children()
+    .filter(".markedCompleted").length;
     if ($("#entry_card_continer").children(".markedCompleted").length === 0) {
       console.log("working");
       $("#clear_completed_container").slideDown();
@@ -215,13 +261,18 @@ $(document).ready(function () {
           $(this).remove();
         }, 1000);
       });
-    $("#item_count").html(taskCount - amountRemoved);
+    console.log(taskCount);
+    console.log(amountRemoved);
+    // taskCount = taskCount - amountRemoved;
+    taskCount = itemCount(taskCount, amountRemoved, "remove")
+    console.log(taskCount);
+    $("#item_count").text(taskCount);
   });
 
   //clicking remove individual tasks
 
   $(document).on("click", ".cancel_container", function () {
-    let amountRemoved = $("img").filter(".remove").length;
+    let amountRemoved = 1;
     // let testing = $(this).prev().text();
     // console.log(testing);
     // if ($(this).prev().children(".remove")) {
@@ -232,6 +283,7 @@ $(document).ready(function () {
     setTimeout(() => {
       $(this).parents(".added_task").remove();
     }, 1000);
-    $("#item_count").html(taskCount - amountRemoved);
+    $("#item_count").text(itemCount(taskCount, amountRemoved, "remove"));
+    taskCount = itemCount(taskCount, amountRemoved, "remove");
   });
 });
